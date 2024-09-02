@@ -3,6 +3,7 @@ import { createRoutesFromElements, Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import App from './components/App'
 import Home from './components/Home'
+// TODO: Import all posts component here
 
 export const routes = createRoutesFromElements(
   <>
@@ -25,5 +26,5 @@ export const routes = createRoutesFromElements(
       </Route>
     </Route>
     <Route path="/login" element={<LandingPage />} />
-  </>
+  </>,
 )
