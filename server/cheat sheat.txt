@@ -1,1 +1,6 @@
 http://localhost:3000/api/v1/groups
+
+Grey/OffWhite: #dcd8d6
+Black / Charcoal: #333333
+French blue: #364da1
+Red / Wine: #4f0404
