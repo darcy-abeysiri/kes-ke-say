@@ -4,6 +4,7 @@ export interface PostSnakeCase {
   username: string
   body: string
   image: string
+  user_image: string
   created_at: string
 }
 
@@ -13,5 +14,6 @@ export interface Post {
   username: string
   body: string
   image: string
+  userImage: string
   createdAt: string
 }
