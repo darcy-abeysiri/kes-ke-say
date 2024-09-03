@@ -24,7 +24,7 @@ function Users() {
           className="flex flex-col items-center border border-solid rounded-lg bg-slate-300"
         >
           <img
-            src={`../../public/images/avatars/${user.image}`}
+            src={`../../images/avatars/${user.image}`}
             alt="user profile"
             className="w-64 mt-5 mb-2.5"
           ></img>
