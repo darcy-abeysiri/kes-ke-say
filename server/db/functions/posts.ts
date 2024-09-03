@@ -11,6 +11,6 @@ export function getAllPosts(db = connection) {
       'posts.image',
       'posts.created_at as createdAt',
       'users.username',
-      'users.image as user_image as userImage',
+      'users.image as userImage',
     )
 }

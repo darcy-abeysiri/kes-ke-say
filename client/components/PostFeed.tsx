@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Post } from '../../models/post'
 import { usePosts } from '../hooks/posts'
 
@@ -16,40 +17,45 @@ export function PostFeed() {
 
   return (
     <>
-      <div className="h-screen flex flex-col items-center justify-center">
+      <div className="my-20 h-[100%] flex flex-col items-center justify-center">
         {postData.map((post) => (
-          <div key={post.id} className="w-1/2 flex flex-col mt-5">
-            <header className="flex flex-row gap-3 items-center">
-              {/* <img src="https://picsum.photos/30/30" className="rounded-full" /> */}
-              <div> User Name </div>
+          <div key={post.id} className="w-1/2 flex flex-col mt-5 ">
+            
+            <header className="flex flex-row gap-3 items-center mt-8  relative right-16">
+              <img src={`public/images/avatars/${post.userImage}`}alt=""
+               className="rounded-full h-[3rem]" 
+               />
+              <div>
+                {post.username}
+              </div>
               <div className="text-sm text-gray-500">
-                {post.createdAt}
+                {dateFormat(post.createdAt)}
               </div>
             </header>
 
-            <div className="grid grid-cols-4 gap-3">
+            <Link to={`/post/${post.id}`}>
+            <article className="grid grid-cols-4 gap-3 border-2 p-2 shadow-md rounded-md">
               <div className="col-span-3 flex flex-col">
-                <div className="font-bold text-lg pt-3">Post Link Text</div>
-
                 <div className="font-light text-sm pt-2">{`${post.body}`}</div>
               </div>
 
               <div className="flex items-center">
-                <img src={`${post.image}`} alt="" />
+                {post.image && <img src={`${post.image}`} alt="" className='rounded-md shadow-md'/>}
               </div>
-            </div>
+            </article>
+            </Link>
           </div>
         ))}
       </div>
     </>
   )
 
-  // function dateFormat(date: string | number) {
-  //   return new Date(date).toLocaleString('en-NZ', {
-  //     day: '2-digit',
-  //     month: 'short',
-  //   })
-  // }
+  function dateFormat(date: number) {
+    return new Date(date).toLocaleString('en-NZ', {
+      day: '2-digit',
+      month: 'short',
+    })
+  }
 }
 
 export default PostFeed
