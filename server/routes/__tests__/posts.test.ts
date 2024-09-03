@@ -2,7 +2,7 @@ import request from 'supertest'
 import { expect, test, beforeAll, afterAll, beforeEach } from 'vitest'
 import server from '../../server.ts'
 import db from '../../db/connection'
-import { Request, Response, NextFunction } from 'express'
+// import { Request, Response, NextFunction } from 'express'
 
 beforeAll(async () => {
   await db.migrate.latest()
@@ -16,33 +16,33 @@ afterAll(async () => {
   await db.destroy()
 })
 
-describe('GET ap1/v1/posts', () => {
-  it('should show the posts', async () => {
-    vi.mocked(fruitsDb.getFruits).mockResolvedValue(mockFruits)
+// describe('GET ap1/v1/posts', () => {
+//   it('should show the posts', async () => {
+//     vi.mocked(fruitsDb.getFruits).mockResolvedValue(mockFruits)
 
-    const res = await request(server).get('/api/v1/fruits')
+//     const res = await request(server).get('/api/v1/fruits')
 
-    expect(res.statusCode).toBe(200)
-    expect(res.body).toMatchInlineSnapshot(`
-      {
-        "fruits": [
-          {
-            "addedByUser": "auth0|123",
-            "averageGramsEach": 120,
-            "id": 1,
-            "name": "Banana",
-          },
-          {
-            "addedByUser": "auth0|456",
-            "averageGramsEach": 195,
-            "id": 2,
-            "name": "Apple",
-          },
-        ],
-      }
-    `)
-  })
-})
+//     expect(res.statusCode).toBe(200)
+//     expect(res.body).toMatchInlineSnapshot(`
+//       {
+//         "fruits": [
+//           {
+//             "addedByUser": "auth0|123",
+//             "averageGramsEach": 120,
+//             "id": 1,
+//             "name": "Banana",
+//           },
+//           {
+//             "addedByUser": "auth0|456",
+//             "averageGramsEach": 195,
+//             "id": 2,
+//             "name": "Apple",
+//           },
+//         ],
+//       }
+//     `)
+//   })
+// })
 
 test('GET /api/v1/posts should return an array of posts', async () => {
   const response = await request(server).get('/api/v1/posts')
@@ -70,16 +70,3 @@ test('GET /api/v1/posts should return an empty array when no posts are available
   expect(response.body).toHaveLength(0)
 })
 
-// test('GET /api/v1/posts should handle database errors gracefully', async () => {
-//   const originalDb = db('posts').join
-//   db('posts').join = () => {
-//     throw new Error('Database error')
-//   }
-
-//   const response = await request(server).get('/api/v1/posts')
-
-//   expect(response.status).toBe(500)
-//   expect(response.body).toEqual({ message: 'Failed to fetch posts' })
-
-//   db('posts').join = originalDb
-// })
