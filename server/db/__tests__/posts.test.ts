@@ -1,5 +1,5 @@
 import { expect, test, beforeAll, beforeEach, afterAll } from 'vitest'
-import { Knex } from 'knex'
+// import { Knex } from 'knex'
 
 import db from '../connection.ts'
 
