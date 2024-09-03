@@ -24,7 +24,7 @@ describe('<User>', () => {
     // 'nock' an http network call
     nock('http://localhost:3000')
       .get('/api/v1/users')
-      // Fake the 'get' request and reply
+      // Fake the 'get' request and replyç
       .reply(200, [
         {
           id: 1,
