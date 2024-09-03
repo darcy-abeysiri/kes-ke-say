@@ -16,7 +16,6 @@ beforeAll(async () => {
 
 afterAll(async () => {
   console.log('afterAll')
-  // Destroy the database connection after all tests
   await db.destroy()
 })
 
@@ -26,11 +25,11 @@ test('should return an array of posts with user details', async () => {
   expect(posts[0]).toEqual({
     id: 1,
     userId: 1,
-    username: 'paige', // Adjust to match the seed data
+    username: 'paige',
     body: 'I found this really interesting book, you should check it out',
     image:
       'https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg',
-    userImage: 'ava-03.png', // Adjust to match the seed data
+    userImage: 'ava-03.png',
     createdAt: expect.any(Number),
   })
 })
