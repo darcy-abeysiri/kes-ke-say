@@ -15,6 +15,12 @@ export function PostFeed() {
   return (
     <>
       <div className="my-20 h-[100%] flex flex-col items-center justify-center">
+        <div className='w-1/2 grid grid-cols-4 gap-3 pr-[8px]'>
+          <p className="col-span-3 text-xl py-3">Les Posts</p>
+          <Link to="/post">
+            <button className="w-[100%] rounded-lg bg-[#364da1] py-3 px-6 font-sans text-md font-bold uppercase text-white shadow-md shadow-[#364da1]/20 transition-all hover:shadow-lg hover:shadow-[#364da1]/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">Add Post</button>
+          </Link>
+        </div>
         {postData.map((post) => (
           <div key={post.id} className="w-1/2 flex flex-col mt-5 ">
             <header className="flex flex-row gap-3 items-center mt-8  relative right-16">

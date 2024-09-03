@@ -12,5 +12,9 @@ export default function Home() {
     }
   }, [isAuth, navigate])
 
-  return <><PostFeed/></>
+  return (
+  <>
+  <PostFeed/>
+  </>
+)
 }
