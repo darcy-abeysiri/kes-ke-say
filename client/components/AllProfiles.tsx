@@ -17,16 +17,15 @@ function Users() {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-4 gap-4">
       {data.map((user) => (
         <div
           key={user.id}
-          className="flex flex-col items-center border border-solid rounded-lg bg-slate-300"
+          className="flex flex-col items-center border- border-solid rounded-lg bg-slate-300"
         >
           <img
             src={`../../images/avatars/${user.image}`}
             alt="user profile"
-            className="w-64 mt-5 mb-2.5"
           ></img>
           <div>
             <h3>
