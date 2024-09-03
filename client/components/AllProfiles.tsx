@@ -2,18 +2,18 @@ import { useQuery } from '@tanstack/react-query'
 import { getUsers } from '../apis/userApi'
 import { User } from '../../models/user.ts'
 
-function Users() {
-  const { data, isLoading, isError, error } = useQuery<User[]>({
+function AllProfiles() {
+  const { data, isLoading, isError } = useQuery<User[]>({
     queryKey: ['getUsers'],
     queryFn: () => getUsers(),
   })
-
+  console.log(data)
   if (isLoading) {
     return <p>Loading...</p>
   }
 
   if (isError) {
-    return error
+    return <p>Error...</p>
   }
 
   return (
@@ -38,4 +38,4 @@ function Users() {
   )
 }
 
-export default Users
+export default AllProfiles
