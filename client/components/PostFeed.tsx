@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Post } from '../../models/post'
 import { usePosts } from '../hooks/posts'
 
 export function PostFeed() {
-  const { data, isPending, isError } = usePosts()
+  const { data: postData, isPending, isError } = usePosts()
 
   if (isPending) {
     return <>Loading Posts</>
@@ -12,8 +11,6 @@ export function PostFeed() {
   if (isError) {
     return <>Something went wrong...</>
   }
-
-  const postData = data as Post[]
 
   return (
     <>
