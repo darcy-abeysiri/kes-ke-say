@@ -1,4 +1,5 @@
 import { expect, test, beforeAll, beforeEach, afterAll } from 'vitest'
+import { Knex } from 'knex'
 
 import db from '../connection.ts'
 
@@ -32,4 +33,25 @@ test('should return an array of posts with user details', async () => {
     userImage: 'ava-03.png',
     createdAt: expect.any(Number),
   })
+})
+
+// test('should handle database errors gracefully', async () => {
+//   const faultyDb = {
+//     select: () => {
+//       return {
+//         join: () => {
+//           throw new Error('Database error')
+//         },
+//       }
+//     },
+//   } as unknown as Knex
+
+//   await expect(getAllPosts(faultyDb)).rejects.toThrow('Failed to fetch posts')
+// })
+
+test('should return an empty array if no posts are found', async () => {
+  await db('posts').truncate()
+
+  const posts = await getAllPosts(db)
+  expect(posts).toHaveLength(0)
 })

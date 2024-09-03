@@ -31,3 +31,26 @@ test('GET /api/v1/posts should return an array of posts', async () => {
     createdAt: expect.any(Number),
   })
 })
+
+test('GET /api/v1/posts should return an empty array when no posts are available', async () => {
+  await db('posts').truncate()
+
+  const response = await request(server).get('/api/v1/posts')
+
+  expect(response.status).toBe(200)
+  expect(response.body).toHaveLength(0)
+})
+
+// test('GET /api/v1/posts should handle database errors gracefully', async () => {
+//   const originalDb = db('posts').join
+//   db('posts').join = () => {
+//     throw new Error('Database error')
+//   }
+
+//   const response = await request(server).get('/api/v1/posts')
+
+//   expect(response.status).toBe(500)
+//   expect(response.body).toEqual({ message: 'Failed to fetch posts' })
+
+//   db('posts').join = originalDb
+// })
