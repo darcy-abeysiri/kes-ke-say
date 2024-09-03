@@ -22,7 +22,7 @@ export function PostFeed() {
           <div key={post.id} className="w-1/2 flex flex-col mt-5 ">
             
             <header className="flex flex-row gap-3 items-center mt-8  relative right-16">
-              <img src={`public/images/avatars/${post.userImage}`}alt=""
+              <img src={`images/avatars/${post.userImage}`}alt=""
                className="rounded-full h-[3rem]" 
                />
               <div>
