@@ -1,7 +1,8 @@
 import request from 'supertest'
 import { expect, test, beforeAll, afterAll, beforeEach } from 'vitest'
-import server from '../../server'
+import server from '../../server.ts'
 import db from '../../db/connection'
+import { Request, Response, NextFunction } from 'express'
 
 beforeAll(async () => {
   await db.migrate.latest()
@@ -13,6 +14,34 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await db.destroy()
+})
+
+describe('GET ap1/v1/posts', () => {
+  it('should show the posts', async () => {
+    vi.mocked(fruitsDb.getFruits).mockResolvedValue(mockFruits)
+
+    const res = await request(server).get('/api/v1/fruits')
+
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toMatchInlineSnapshot(`
+      {
+        "fruits": [
+          {
+            "addedByUser": "auth0|123",
+            "averageGramsEach": 120,
+            "id": 1,
+            "name": "Banana",
+          },
+          {
+            "addedByUser": "auth0|456",
+            "averageGramsEach": 195,
+            "id": 2,
+            "name": "Apple",
+          },
+        ],
+      }
+    `)
+  })
 })
 
 test('GET /api/v1/posts should return an array of posts', async () => {
