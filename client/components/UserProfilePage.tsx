@@ -1,50 +1,53 @@
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import User from '../../models/user'
+import { getUserById } from '../apis/userApi'
+import { User } from '../../models/user'
 
-function useDogProfile(dogId: number) {
+function Users(id: number) {
   return useQuery({
-    queryKey: ['dog', dogId],
-    queryFn: () => getDogById(dogId),
+    queryKey: ['user', id],
+    queryFn: () => getUserById(id),
   })
 }
-const getDogById = async (id: number): Promise<Dog> => {
-  const response = await fetch(`/api/v1/dogs/${id}`)
+const getUserById = async (id: number): Promise<User> => {
+  const response = await fetch(`/api/v1/users/${id}`)
   return response.json()
 }
 
-function DogProfile() {
-  const { dogId } = useParams<{ dogId: string }>()
-  const { data: dog, isPending, isError, error } = useQuery(Number(dogId))
+function UserProfile() {
+  const { id } = useParams<{ id: string }>()
+  const { data, isLoading, isError, error } = useQuery(Number(id))
 
-  if (isPending) {
+  if (isLoading) {
     return <p>loading...</p>
   }
 
   if (isError) {
-    console.error(error?.message)
+    console.error(error)
     return <p>❗️❗️❗️BROKEN❗️❗️❗️</p>
   }
 
-  if (!dog) {
-    return <p>Cannot find Dog</p>
-  }
-
   return (
-    <div className="grid grid-cols-1">
-      <img
-        src="../../client/public/dog_profile.jpg"
-        alt="dog profile"
-        className="w-64"
-      />
-      <h3>Name: {dog.name}</h3>
-      <p>Owner ID: {dog.ownerId}</p>
-      <p>
-        Address: {dog.street}, {dog.suburb}, {dog.city}
-      </p>
-      <p>{dog.isGood ? `🐶` : `👿`}</p>
+    <div className="grid grid-cols-4 gap-4">
+      {data.map((user) => (
+        <div
+          key={user.id}
+          className="flex flex-col items-center border- border-solid rounded-lg bg-slate-300"
+        >
+          <img
+            src={`../../images/avatars/${user.image}`}
+            alt="user profile"
+          ></img>
+          <div>
+            <h3>
+              <strong>{user.username}</strong>
+            </h3>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
+s
 
-export default DogProfile
+export default UserProfile
