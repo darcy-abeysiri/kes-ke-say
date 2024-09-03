@@ -6,7 +6,7 @@ const rootUrl = '/api/v1'
 export async function getAllPosts(): Promise<Post[]> {
   try {
     const response = await request.get(`${rootUrl}/posts`)
-    return response.body.posts
+    return response.body
   } catch (error) {
     console.error(error)
     throw error
