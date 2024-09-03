@@ -20,15 +20,17 @@ afterAll(async () => {
   await db.destroy()
 })
 
-test('should return an array of posts', async () => {
+test('should return an array of posts with user details', async () => {
   const posts = await getAllPosts(db)
   expect(posts).toHaveLength(4)
   expect(posts[0]).toEqual({
     id: 1,
-    user_id: 1,
+    userId: 1,
+    username: 'paige', // Adjust to match the seed data
     body: 'I found this really interesting book, you should check it out',
     image:
       'https://img.freepik.com/free-photo/book-composition-with-open-book_23-2147690555.jpg',
-    created_at: new Date(Date.now()),
+    userImage: 'ava-03.png', // Adjust to match the seed data
+    createdAt: expect.any(Number),
   })
 })
