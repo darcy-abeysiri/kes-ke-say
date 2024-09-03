@@ -13,8 +13,4 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/error', async (req, res) => {
-  res.sendStatus(500)
-})
-
 export default router
