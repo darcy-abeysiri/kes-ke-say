@@ -19,15 +19,14 @@ afterAll(async () => {
 // Getting allUserProtiles
 describe('getting all user profiles', () => {
   it('gets the user profiles', async () => {
-    const res = await request(server).get('/api/v1/users/')
+    const res = await request(server).get('/api/v1/users')
 
     expect(res.body).toHaveLength(4)
   })
-})
 
-describe('getting invalide user profile', () => {
-  it('responds with not found when error', async () => {
-    const res = await request(server).get('/api/v1/uses/')
-    expect(res.status).toBe(404)
+  // Checking error
+  it('should respond with 500 when an error occurs', async () => {
+    const res = await request(server).get('/api/v1/users/error')
+    expect(res.status).toBe(500)
   })
 })
