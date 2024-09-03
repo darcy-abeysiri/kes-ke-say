@@ -7,7 +7,7 @@ function AllProfiles() {
     queryKey: ['getUsers'],
     queryFn: () => getUsers(),
   })
-  console.log(data)
+
   if (isLoading) {
     return <p>Loading...</p>
   }
@@ -18,7 +18,7 @@ function AllProfiles() {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {data.map((user) => (
+      {data?.map((user) => (
         <div
           key={user.id}
           className="flex flex-col items-center border- border-solid rounded-lg bg-slate-300"
