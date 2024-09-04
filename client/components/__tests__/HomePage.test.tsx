@@ -9,7 +9,6 @@ beforeAll(() => {
   nock.disableNetConnect()
 })
 
-
 const dummyPosts = [
   {
     id: 1,
@@ -29,7 +28,6 @@ const dummyPosts = [
   },
 ]
 
-
 describe('<Home>', () => {
   it('should render a list of posts', async () => {
     // Arrange
@@ -37,26 +35,25 @@ describe('<Home>', () => {
       .get('/api/v1/posts')
       .reply(200, dummyPosts)
 
-    const screen = renderRoute("/")
-    await waitForElementToBeRemoved(() => screen.getByText("Loading Posts"))
-    
+    const screen = renderRoute('/')
+    await waitForElementToBeRemoved(() => screen.getByText('Loading Posts'))
+
     // Act
-    const expectedPost = await screen.getByText('I found this really interesting book, you should check it out')
-    
+    const expectedPost = await screen.getByText(
+      'I found this really interesting book, you should check it out',
+    )
+
     // Assert
     expect(expectedPost).toBeVisible()
     expect(scope.isDone()).toBe(true)
-    
   })
-  
+
   it('should show an error message if something goes wrong', async () => {
     // Arrange
-    const scope = nock(document.baseURI)
-    .get('/api/v1/posts')
-    .reply(500)
-    
-    const screen = renderRoute("/")
-    await waitForElementToBeRemoved(() => screen.getByText("Loading Posts"))
+    const scope = nock(document.baseURI).get('/api/v1/posts').reply(500)
+
+    const screen = renderRoute('/')
+    await waitForElementToBeRemoved(() => screen.getByText('Loading Posts'))
 
     // Act
     const expectedError = screen.getByText('Something went wrong...')
@@ -64,7 +61,5 @@ describe('<Home>', () => {
     // Assert
     expect(expectedError).toBeInTheDocument()
     expect(scope.isDone()).toBe(true)
-
   })
 })
-
