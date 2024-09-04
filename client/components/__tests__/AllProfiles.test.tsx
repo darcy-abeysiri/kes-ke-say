@@ -30,13 +30,11 @@ const fakeUsers = [
 
 describe('<User>', () => {
   it('should render a user', async () => {
-    // ARRANGE
     // 'nock' an http network call
     const scope = nock(document.baseURI)
       .get('/api/v1/users')
       // Fake the 'get' request and replyç
       .reply(200, fakeUsers)
-    // ACT
     //  Render Route
     const screen = renderRoute('/profiles')
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
@@ -44,21 +42,19 @@ describe('<User>', () => {
     //  async wait for screen
     const user1 = await screen.getByText('ida')
 
-    // ASSERT
     expect(user1).toBeVisible()
     expect(scope.isDone()).toBe(true)
   })
 
-  // SAD PATH! ERRORS ERRORS ERRORS
+  // Error
   it('should render an error message when things go wrong', async () => {
-    // ARRANGE
     // 'nock' an http network call
     nock('http://localhost:3000')
       // Fake the 'get' request and reply
       .get('/api/v1/users/')
       // Fake the 'get' request and reply's with 500 server error
       .reply(500)
-    // ACT
+
     const screen = renderRoute('/profiles')
 
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
@@ -66,7 +62,6 @@ describe('<User>', () => {
     // check that error message exists
     const errorMsg = screen.getByText('Error...')
 
-    // ASSERT
     expect(errorMsg).toBeInTheDocument()
   })
 })
