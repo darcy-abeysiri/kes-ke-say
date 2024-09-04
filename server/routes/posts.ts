@@ -19,6 +19,11 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params
   try {
     const post = await getPostById(parseInt(id)) // parseInt converts string to number
+
+    if(!post){
+      res.sendStatus(404)
+    }
+
     res.json(post)
   } catch (error) {
     console.error(error)
