@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { User } from '../../models/user'
 
-export function useUserProfile(id: number) {
+export function useUserProfile(username: string) {
   return useQuery({
-    queryKey: ['user', id],
-    queryFn: () => getUserById(id),
+    queryKey: ['user', username],
+    queryFn: () => getUserByName(username),
   })
 }
-const getUserById = async (id: number): Promise<User> => {
-  const response = await fetch(`/api/v1/users/${id}`)
+const getUserByName = async (username: string): Promise<User> => {
+  const response = await fetch(`/api/v1/users/${username}`)
   return response.json()
 }

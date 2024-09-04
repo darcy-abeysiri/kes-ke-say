@@ -16,9 +16,9 @@ export function getAllUsers(): Promise<User[]> {
 }
 
 // Getting each user id
-export function getUserById(id: number): Promise<User> {
+export function getUserByName(username: string): Promise<User> {
   return db('users')
-    .where({ id })
+    .where({ username })
     .first()
     .select(
       'id',

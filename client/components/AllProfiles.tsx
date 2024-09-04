@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getUsers } from '../apis/userApi'
 import { User } from '../../models/user.ts'
+import { Link } from 'react-router-dom'
 
 function Users() {
   const { data, isLoading, isError, error } = useQuery<User[]>({
@@ -23,10 +24,12 @@ function Users() {
           key={user.id}
           className="flex flex-col items-center border- border-solid rounded-lg bg-slate-300"
         >
-          <img
-            src={`../../images/avatars/${user.image}`}
-            alt="user profile"
-          ></img>
+          <Link to={`/profiles/${user.username}`}>
+            <img
+              src={`../../images/avatars/${user.image}`}
+              alt="user profile"
+            ></img>
+          </Link>
           <div>
             <h3>
               <strong>{user.username}</strong>
