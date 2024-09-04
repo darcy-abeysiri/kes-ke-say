@@ -24,7 +24,7 @@ function UserProfile() {
       <div className="p-1">
         <div className="flex justify-end">
           <Link to={'/profiles'} className="btn-blue px-3 py-2 rounded-md">
-            View Full Menu
+            View All Profiles
           </Link>
         </div>
       </div>
