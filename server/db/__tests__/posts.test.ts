@@ -5,17 +5,14 @@ import db from '../connection.ts'
 import { getAllPosts } from '../functions/posts.ts'
 
 beforeEach(async () => {
-  console.log('beforeEach')
   await db.seed.run()
 })
 
 beforeAll(async () => {
-  console.log('beforeAll')
   await db.migrate.latest()
 })
 
 afterAll(async () => {
-  console.log('afterAll')
   await db.destroy()
 })
 
