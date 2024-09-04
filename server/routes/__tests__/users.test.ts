@@ -23,3 +23,11 @@ describe('getting all user profiles', () => {
     expect(res.status).toBe(200)
   })
 })
+
+// Getting single User Protiles
+describe('getting all single user profiles', () => {
+  it('gets the single profiles', async () => {
+    const res = await request(server).get('/api/v1/users/username/')
+    expect(res.status).toBe(200)
+  })
+})
