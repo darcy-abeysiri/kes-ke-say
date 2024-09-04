@@ -3,8 +3,8 @@ import { getUsers } from '../apis/userApi'
 import { User } from '../../models/user.ts'
 import { Link } from 'react-router-dom'
 
-function Users() {
-  const { data, isLoading, isError, error } = useQuery<User[]>({
+function AllProfiles() {
+  const { data, isLoading, isError } = useQuery<User[]>({
     queryKey: ['getUsers'],
     queryFn: () => getUsers(),
   })
@@ -14,12 +14,12 @@ function Users() {
   }
 
   if (isError) {
-    return error
+    return <p>Error...</p>
   }
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {data.map((user) => (
+      {data?.map((user) => (
         <div
           key={user.id}
           className="flex flex-col items-center border- border-solid rounded-lg bg-slate-300"
@@ -41,4 +41,4 @@ function Users() {
   )
 }
 
-export default Users
+export default AllProfiles

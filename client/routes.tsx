@@ -3,6 +3,7 @@ import { createRoutesFromElements, Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import App from './components/App'
 import Home from './components/Home'
+// TODO: Import all posts component here
 import AllProfiles from './components/AllProfiles'
 import UserProfilePage from './components/UserProfilePage'
 
@@ -17,7 +18,7 @@ export const routes = createRoutesFromElements(
       </Route>
       <Route path="register" element={<div>Register</div>} />
       <Route path="profiles">
-        <Route index element={<AllProfiles />}></Route>
+        <Route index element={<AllProfiles />} />
         <Route path=":username" element={<UserProfilePage />} />
       </Route>
       <Route path="groups">

@@ -1,41 +1,67 @@
-import { useQuery } from '@tanstack/react-query'
-import { getUsers } from '../apis/userApi'
-import { User } from '../../models/user.ts'
+//@vitest-environment jsdom
+import { describe, it, expect, beforeAll } from 'vitest'
+import { waitForElementToBeRemoved } from '@testing-library/react'
+import { renderRoute } from '../../test-utils'
+import nock from 'nock'
+import '@testing-library/jest-dom/vitest'
 
-function AllProfiles() {
-  const { data, isLoading, isError } = useQuery<User[]>({
-    queryKey: ['getUsers'],
-    queryFn: () => getUsers(),
+beforeAll(() => {
+  nock.disableNetConnect()
+})
+
+const fakeUsers = [
+  {
+    id: 1,
+    auth0_id: 'auth0|123',
+    username: 'paige',
+    full_name: 'Paige Turner',
+    location: 'Auckland',
+    image: 'ava-03.png',
+  },
+  {
+    id: 2,
+    auth0_id: 'auth0|234',
+    username: 'ida',
+    full_name: 'Ida Dapizza',
+    location: 'Auckland',
+    image: 'ava-02.png',
+  },
+]
+
+describe('<User>', () => {
+  it('should render a user', async () => {
+    // 'nock' an http network call
+    const scope = nock(document.baseURI)
+      .get('/api/v1/users')
+      // Fake the 'get' request and replyç
+      .reply(200, fakeUsers)
+    //  Render Route
+    const screen = renderRoute('/profiles')
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
+
+    //  async wait for screen
+    const user1 = await screen.getByText('ida')
+
+    expect(user1).toBeVisible()
+    expect(scope.isDone()).toBe(true)
   })
 
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
+  // Error
+  it('should render an error message when things go wrong', async () => {
+    // 'nock' an http network call
+    nock('http://localhost:3000')
+      // Fake the 'get' request and reply
+      .get('/api/v1/users/')
+      // Fake the 'get' request and reply's with 500 server error
+      .reply(500)
 
-  if (isError) {
-    return <p>Error...</p>
-  }
+    const screen = renderRoute('/profiles')
 
-  return (
-    <div className="grid grid-cols-4 gap-4">
-      {data?.map((user) => (
-        <div
-          key={user.id}
-          className="flex flex-col items-center border- border-solid rounded-lg bg-slate-300"
-        >
-          <img
-            src={`../../images/avatars/${user.image}`}
-            alt="user profile"
-          ></img>
-          <div>
-            <h3>
-              <strong>{user.username}</strong>
-            </h3>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
 
-export default AllProfiles
+    // check that error message exists
+    const errorMsg = screen.getByText('Error...')
+
+    expect(errorMsg).toBeInTheDocument()
+  })
+})

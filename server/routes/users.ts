@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
     const users = await db.getAllUsers()
     res.json(users)
   } catch (error) {
-    console.error(`Database error: ${error}`)
     res.sendStatus(500)
   }
 })
