@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useUserProfile } from '../hooks/useUserProfile'
+// import AllProfiles from '../components/AllProfiles'
 
 
 function UserProfile() {
@@ -19,11 +20,9 @@ function UserProfile() {
     <><div className="grid grid-cols-1">
 
       <div>
-        <Link to={/users/} />}>
         <button className="grid grid-cols-1 border rounded-r-lg bg-slate-300">
           View All Profiles
         </button>
-      </Link>
     </div><img
         src={`../../images/avatars/${user.image}`}
         alt="user profile"
@@ -33,3 +32,7 @@ function UserProfile() {
 }
 
 export default UserProfile
+
+{/* <Button onClick={<AllProgiles.tsx />}>
+View Full Menu
+</Button> */}
