@@ -20,10 +20,3 @@ describe('db.getAllUsers()', () => {
     expect(users).toHaveLength(4)
   })
 })
-
-describe('db.getUserByName()', () => {
-  it('gets the single user', async () => {
-    const users = await db.getUserByName()
-    expect(users).toHaveLength(4)
-  })
-})

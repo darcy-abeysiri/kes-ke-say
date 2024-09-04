@@ -83,10 +83,35 @@ describe('GET ap1/v1/users', () => {
   })
 })
 
-// Getting single User Protiles
-describe('getting all single user profiles', () => {
-  it('gets the single profiles', async () => {
-    const res = await request(server).get('/api/v1/users/username/')
-    expect(res.status).toBe(200)
+// Test for single username
+vi.mock('../../db/functions/users.ts')
+
+const mockSingleUser = {
+  id: 1,
+  auth0Id: 'auth0|123',
+  username: 'paige',
+  fullName: 'Paige Turner',
+  location: 'Auckland',
+  image: 'ava-03.png',
+}
+
+describe('GET ap1/v1/users/username', () => {
+  it('should show the single user', async () => {
+    vi.mocked(db.getUserByName).mockResolvedValue(mockSingleUser)
+
+    const res = await request(server).get('/api/v1/users/username')
+
+    expect(res.statusCode).toBe(200)
+  })
+})
+
+// Checking 500
+describe('GET ap1/v1/users/username', () => {
+  it('when cannot find username', async () => {
+    vi.mocked(db.getUserByName).mockRejectedValue(mockSingleUser)
+
+    const res = await request(server).get('/api/v1/users/username')
+
+    expect(res.statusCode).toBe(500)
   })
 })
