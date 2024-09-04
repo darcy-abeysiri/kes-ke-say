@@ -1,38 +1,36 @@
 import { useParams } from 'react-router-dom'
 import { useUserProfile } from '../hooks/useUserProfile'
 
-function DogProfile() {
-  const { dogId } = useParams<{ dogId: string }>()
-  const { data: dog, isPending, isError, error } = useUserProfile(Number(dogId))
+function UserProfile() {
+  const { id } = useParams<{ id: string }>()
+  const { data: user, isLoading, isError, error } = useUserProfile(Number(id))
 
-  if (isPending) {
-    return <p>loading...</p>
+  if (isLoading) {
+    return <p>Loading...</p>
   }
 
   if (isError) {
-    console.error(error?.message)
-    return <p>❗️❗️❗️BROKEN❗️❗️❗️</p>
-  }
-
-  if (!dog) {
-    return <p>Cannot find Dog</p>
+    console.error(error)
+    return <p>Error...</p>
   }
 
   return (
     <div className="grid grid-cols-1">
+      <div>
+        <button className="grid grid-cols-1 border rounded-r-lg bg-slate-300">
+          View All Profiles
+        </button>
+      </div>
       <img
-        src="../../client/public/dog_profile.jpg"
-        alt="dog profile"
+        src={`../../images/avatars/${user.image}`}
+        alt="user profile"
         className="w-64"
       />
-      <h3>Name: {dog.name}</h3>
-      <p>Owner ID: {dog.ownerId}</p>
-      <p>
-        Address: {dog.street}, {dog.suburb}, {dog.city}
-      </p>
-      <p>{dog.isGood ? `🐶` : `👿`}</p>
+      <strong>{user.username}</strong>
+      <strong>{user.fullName}</strong>
+      <strong>{user.location}</strong>
     </div>
   )
 }
 
-export default DogProfile
+export default UserProfile
