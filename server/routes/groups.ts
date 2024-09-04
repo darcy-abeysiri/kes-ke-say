@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     res.json(groups).status(200)
   } catch (error) {
     console.error(`Could not find all groups: ${error}`)
-    res.status(500)
+    res.sendStatus(500)
   }
 })
 
