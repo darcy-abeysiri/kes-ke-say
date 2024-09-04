@@ -3,6 +3,7 @@ import { createRoutesFromElements, Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import App from './components/App'
 import Home from './components/Home'
+// TODO: Import all posts component here
 import AllProfiles from './components/AllProfiles'
 
 export const routes = createRoutesFromElements(
