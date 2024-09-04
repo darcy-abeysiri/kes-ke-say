@@ -21,23 +21,24 @@ function UserProfile() {
 
   return (
     <>
-      <div className="grid grid-cols-1">
-        <div>
-          <Link
-            to={'/profiles'}
-            className="flex flex-cols-1 border rounded-r-lg bg-slate-300"
-          >
-            View Full Menu
-          </Link>
+      <Link
+        to={'/profiles'}
+        className="btn-blue px-3 mx-3 flex justify-end justify-self-auto"
+      >
+        View Full Menu
+      </Link>
+      <div className="flex justify-center relative ">
+        <div></div>
+        <div className="grid grid-cols-1 gap-3">
+          <img
+            src={`../../images/avatars/${user.image}`}
+            alt="user profile"
+            className="w-64"
+          />
+          <strong className="flex justify-center">{user.username}</strong>
+          <strong className="flex justify-center">{user.fullName}</strong>
+          <strong className="flex justify-center">{user.location}</strong>
         </div>
-        <img
-          src={`../../images/avatars/${user.image}`}
-          alt="user profile"
-          className="w-64"
-        />
-        <strong>{user.username}</strong>
-        <strong>{user.fullName}</strong>
-        <strong>{user.location}</strong>
       </div>
     </>
   )
