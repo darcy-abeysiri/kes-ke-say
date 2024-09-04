@@ -5,7 +5,7 @@ export function PostFeed() {
   const { data: postData, isPending, isError } = usePosts()
 
   if (isPending) {
-    return <>Loading Posts</>
+    return <p id="loading">Loading Posts</p>
   }
 
   if (isError) {
