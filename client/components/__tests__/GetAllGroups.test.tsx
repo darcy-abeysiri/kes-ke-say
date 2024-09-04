@@ -8,21 +8,24 @@ describe('Visiting the all groups page', () => {
   //loading
   it('shows a loading indicator', async () => {
     const screen = renderRoute('/groups')
-    const indicator = screen.getByText('Loading') // maybe change to getByText
+    const indicator = screen.getByText('Loading')
     expect(indicator).toBeVisible()
   })
 
   //error
   it('shows an error message when server fails', async () => {
-    nock('http://localhost').get('/api/v1/groups').reply(500, 'Error')
+    const scope = nock(document.baseURI)
+      .get('/api/v1/groups')
+      .reply(500, 'Error')
     const screen = renderRoute('/groups')
-    const errorMessage = await screen.findByText(/Error/)
+    const errorMessage = await screen.findByText('Error')
+    expect(scope.isDone()).toBe(true)
     expect(errorMessage).toBeVisible()
   })
 
   it('shows a list of all the groups', async () => {
-    nock('http://localhost')
-      .get('/api.v1/groups')
+    const scope = nock(document.baseURI)
+      .get('/api/v1/groups')
       .reply(200, [
         { id: 1, name: 'friendChips', image: 'fries-darkgray.png' },
         { id: 2, name: 'The fast and the curious', image: 'car-darkgray.png' },
@@ -33,10 +36,13 @@ describe('Visiting the all groups page', () => {
     const screen = renderRoute('/groups')
     // Act
     //Assert
-    const groupName = await screen.findByRole('Name', {
-      name: 'All groups (3)',
-    })
+    const groupName = await screen.findByText('friendChips')
+    const groupName2 = await screen.findByText('The fast and the curious')
+    const groupName3 = await screen.findByText('Taco bout it')
 
+    expect(scope.isDone()).toBe(true)
     expect(groupName).toBeVisible()
+    expect(groupName2).toBeVisible()
+    expect(groupName3).toBeVisible()
   })
 })

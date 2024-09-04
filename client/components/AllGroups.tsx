@@ -16,7 +16,7 @@ export default function AllGroups() {
     return <p>Error</p>
   }
 
-  console.log('All Groups: ', data)
+  // console.log('All Groups: ', data)
 
   return (
     <>
