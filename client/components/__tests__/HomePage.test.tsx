@@ -27,39 +27,42 @@ const dummyPosts = [
       'https://img.freepik.com/free-photo/fettuccine-with-tomato-sauce-minced-meat-garnished-with-grated-parmesan_141793-1778.jpg',
     created_at: new Date(Date.now()),
   },
-  {
-    id: 3,
-    user_id: 2,
-    body: 'No pineapples',
-    image:
-      'https://img.freepik.com/free-photo/pineapple-with-knife-white-cutting-board_176474-8791.jpg',
-    created_at: new Date(Date.now()),
-  },
-  {
-    id: 4,
-    user_id: 4,
-    body: 'I love a full English breakfast',
-    image: '',
-    created_at: new Date(Date.now()),
-  },
 ]
 
 
-
-describe('The Homepage', () => {
+describe('<Home>', () => {
   it('should render a list of posts', async () => {
+    // Arrange
     const scope = nock(document.baseURI)
       .get('/api/v1/posts')
       .reply(200, dummyPosts)
 
     const screen = renderRoute("/")
+    await waitForElementToBeRemoved(() => screen.getByText("Loading Posts"))
+    
+    // Act
+    const expectedPost = await screen.getByText('I found this really interesting book, you should check it out')
+    
+    // Assert
+    expect(expectedPost).toBeVisible()
+    expect(scope.isDone()).toBe(true)
+    
+  })
+  
+  it('should show an error message if something goes wrong', async () => {
+    // Arrange
+    const scope = nock(document.baseURI)
+    .get('/api/v1/posts')
+    .reply(500)
+    
+    const screen = renderRoute("/")
+    await waitForElementToBeRemoved(() => screen.getByText("Loading Posts"))
 
-    await waitForElementToBeRemoved(() => {screen.getByText("Loading Posts")})
-
-    const postExample = await screen.getByText('I found this really interesting book, you should check it out')
+    // Act
+    const expectedError = screen.getByText('Something went wrong...')
 
     // Assert
-    expect(postExample).toBeVisible()
+    expect(expectedError).toBeInTheDocument()
     expect(scope.isDone()).toBe(true)
 
   })

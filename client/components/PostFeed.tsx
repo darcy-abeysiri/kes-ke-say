@@ -9,7 +9,7 @@ export function PostFeed() {
   }
 
   if (isError) {
-    return <>Something went wrong...</>
+    return <p>Something went wrong...</p>
   }
 
   return (
