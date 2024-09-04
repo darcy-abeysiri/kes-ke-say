@@ -42,12 +42,10 @@ const fakeGroups = [
 
 describe('get all groups', () => {
   it('responds with all the data', async () => {
-    // Ensure `getAllGroups` is mocked to return the expected data
     vi.mocked(getAllGroups).mockResolvedValue(fakeGroups)
 
     const res = await request(server).get('/api/v1/groups')
 
-    // expect(res.body).toHaveLength(3)
     expect(res.body).toStrictEqual([
       { id: 1, name: 'friendChips', image: 'fries-darkgray.png' },
       { id: 2, name: 'The fast and the curious', image: 'car-darkgray.png' },

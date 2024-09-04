@@ -5,14 +5,12 @@ import { renderRoute } from '../../test-utils'
 import nock from 'nock'
 
 describe('Visiting the all groups page', () => {
-  //loading
   it('shows a loading indicator', async () => {
     const screen = renderRoute('/groups')
     const indicator = screen.getByText('Loading')
     expect(indicator).toBeVisible()
   })
 
-  //error
   it('shows an error message when server fails', async () => {
     const scope = nock(document.baseURI)
       .get('/api/v1/groups')
@@ -32,10 +30,8 @@ describe('Visiting the all groups page', () => {
         { id: 3, name: 'Taco bout it', image: 'taco-darkgray.png' },
       ])
 
-    //Arrange
     const screen = renderRoute('/groups')
-    // Act
-    //Assert
+
     const groupName = await screen.findByText('friendChips')
     const groupName2 = await screen.findByText('The fast and the curious')
     const groupName3 = await screen.findByText('Taco bout it')
