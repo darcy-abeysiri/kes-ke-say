@@ -43,7 +43,7 @@ export default function Post() {
           {/* <img src={`images/avatars/${post.userImage}`} alt={post.userImage} className=""/> */}
         </div>
         <div className="tre">{post.body}</div>
-        <div className="text-slate-600">
+        <div className="text-slate-600 my-5 italic text-right">
           <p>
             Posted by{' '}
             <Link to={`/profiles/${post.username}`}>
@@ -54,7 +54,7 @@ export default function Post() {
           </p>
         </div>
       </div>
-      <Voting />
+      <div className='m-10'><Voting /></div>
     </div>
   )
 }
