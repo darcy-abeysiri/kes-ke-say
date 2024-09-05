@@ -14,7 +14,7 @@ function UserProfile() {
     return <p>Loading...</p>
   }
 
-  if (isError) {
+  if (isError || !user) {
     console.error(error)
     return <p>Error...</p>
   }

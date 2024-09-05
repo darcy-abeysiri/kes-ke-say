@@ -9,30 +9,20 @@ beforeAll(() => {
   nock.disableNetConnect()
 })
 
-const fakeUsers = [
-  {
-    id: 1,
-    auth0_id: 'auth0|123',
-    username: 'paige',
-    full_name: 'Paige Turner',
-    location: 'Auckland',
-    image: 'ava-03.png',
-  },
-  {
-    id: 2,
-    auth0_id: 'auth0|234',
-    username: 'ida',
-    full_name: 'Ida Dapizza',
-    location: 'Auckland',
-    image: 'ava-02.png',
-  },
-]
+const fakeUsers = {
+  id: 2,
+  auth0Id: 'auth0|234',
+  username: 'ida',
+  fullName: 'Ida Dapizza',
+  location: 'Auckland',
+  image: 'ava-02.png',
+}
 
 describe('<UserProfile>', () => {
   it('should render a user profile', async () => {
     // 'nock' an http network call
     const scope = nock(document.baseURI)
-      .get('/api/v1/profiles/ida')
+      .get('/api/v1/users/ida')
       // Fake the 'get' request and replyc
       .reply(200, fakeUsers)
     //  Render Route
@@ -51,7 +41,7 @@ describe('<UserProfile>', () => {
     // 'nock' an http network call
     nock('http://localhost:3000')
       // Fake the 'get' request and reply
-      .get('/api/v1/profiles/ida')
+      .get('/api/v1/users/ida')
       // Fake the 'get' request and reply's with 500 server error
       .reply(500)
 
