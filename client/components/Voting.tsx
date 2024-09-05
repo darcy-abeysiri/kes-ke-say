@@ -21,21 +21,6 @@ export default function Voting() {
         alt="Car"
         className="size-12 opacity-50 hover:opacity-100 transition hover:animate-ping"
         />
-        {/* <img 
-          src="/images/icons/car-darkgray.png" 
-          alt="Car" 
-          className="size-12" 
-          /> */}
-      {/* <img
-        src="/images/icons/fries-darkgray.png"
-        alt="Car"
-        className="size-12"
-      /> */}
-      {/* <img
-        src="/images/icons/taco-darkgray.png"
-        alt="Car"
-        className="size-12"
-      /> */}
     </div>
   )
 }
