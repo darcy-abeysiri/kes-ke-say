@@ -25,23 +25,4 @@ router.get('/:username', async (req, res) => {
   }
 })
 
-// //Patch UserProfile
-// router.patch('/:id', async (req, res) => {
-//   const id = Number(req.params.id)
-//   const { auth0_id, username, full_name, location, image } = req.body
-//   try {
-//     const user = await db.updateUser(id, {
-//       auth0_id,
-//       username,
-//       full_name,
-//       location,
-//       image,
-//     })
-//     res.json(user)
-//   } catch (error) {
-//     console.error(`Database error: ${error}`)
-//     res.sendStatus(500)
-//   }
-// })
-
 export default router
