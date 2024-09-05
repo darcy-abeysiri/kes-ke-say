@@ -14,3 +14,18 @@ export function getAllUsers(): Promise<User[]> {
     'image',
   )
 }
+
+// Getting each user id
+export function getUserByName(username: string): Promise<User> {
+  return db('users')
+    .where({ username })
+    .first()
+    .select(
+      'id',
+      'auth0_id as auth0Id',
+      'username',
+      'full_name as fullName',
+      'location',
+      'image',
+    )
+}

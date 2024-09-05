@@ -7,3 +7,8 @@ export async function getUsers() {
   const result = await request.get(`${rootURL}/users`)
   return result.body as User[]
 }
+
+export async function getUserByName(username: string) {
+  const result = await request.get(`${rootURL}/users/${username}`)
+  return result.body as User
+}
