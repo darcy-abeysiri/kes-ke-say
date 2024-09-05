@@ -24,7 +24,7 @@ export default function Post() {
 
   return (
     <div className="flex flex-col items-center m-10 ">
-      <div className="w-1/2 shadow-md shadow-gray-600 p-10 rounded-md">
+      <div className="max-w-[700px] shadow-md shadow-gray-600 p-10 rounded-md ">
         <div className="size-full">
           <img
             src={post.image}
@@ -61,7 +61,8 @@ export default function Post() {
             </p>
           </div>
         </div>
-        <div className="m-10">
+        <hr className="my-10" />
+        <div className="flex flex-col items-center">
           <Voting />
         </div>
       </div>
