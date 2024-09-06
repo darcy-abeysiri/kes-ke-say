@@ -18,10 +18,8 @@ afterAll(async () => {
 
 describe('db.getAllGroups()', () => {
   it('get all the groups', async () => {
-    //ARRANGE
-    //ACT
     const groups = await getAllGroups()
-    //ASSERT
+
     expect(groups).toHaveLength(3)
   })
 })

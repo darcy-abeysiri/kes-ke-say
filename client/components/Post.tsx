@@ -38,8 +38,6 @@ export default function Post() {
           />
         </div>
 
-        {/* <h2>{post.username}</h2> */}
-
         <div className="text-lg">{post.body}</div>
         <div className="text-slate-600 my-5 italic flex flex-col-auto mt-20 ">
           <div className="size-[3rem] mr-5">

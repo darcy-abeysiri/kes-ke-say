@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
     const groups = await db.getAllGroups()
     res.json(groups).status(200)
   } catch (error) {
-    console.error(`Could not find all groups: ${error}`)
     res.sendStatus(500)
   }
 })

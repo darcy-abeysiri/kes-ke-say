@@ -9,11 +9,6 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 export async function getPostById(id: number): Promise<Post> {
-  try {
-    const response = await request.get(`${rootUrl}/posts/${id}`)
-    return response.body
-  } catch (error) {
-    console.error(error)
-    throw error
-  }
+  const response = await request.get(`${rootUrl}/posts/${id}`)
+  return response.body
 }

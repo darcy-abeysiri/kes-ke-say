@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const posts = await getAllPosts()
     res.json(posts)
   } catch (error) {
-    console.error(error)
+    // console.error(error)
     res.status(500).json({ message: 'Failed to fetch all posts' })
   }
 })
@@ -20,13 +20,13 @@ router.get('/:id', async (req, res) => {
   try {
     const post = await getPostById(parseInt(id)) // parseInt converts string to number
 
-    if(!post){
+    if (!post) {
       res.sendStatus(404)
     }
 
     res.json(post)
   } catch (error) {
-    console.error(error)
+    // console.error(error)
     res.status(500).json({ message: `Failed to fetch post with ID: ${id}` })
   }
 })

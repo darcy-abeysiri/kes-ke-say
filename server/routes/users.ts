@@ -20,7 +20,7 @@ router.get('/:username', async (req, res) => {
     const user = await db.getUserByName(username)
     res.json(user)
   } catch (error) {
-    console.error(`Database error: ${error}`)
+    // console.error(`Database error: ${error}`)
     res.sendStatus(500)
   }
 })
